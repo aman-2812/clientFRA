@@ -20,7 +20,7 @@ function deploy_fra_client() {
     git clone https://github.com/aman-2812/clientFRA.git
     cd clientFRA
     sudo docker build -t api_fra:v1 .
-	sudo docker run -d -p 8000:8000 api_fra:v1
+	  sudo docker run -d -p 8000:8000 api_fra:v1
 }
 
 install_docker

@@ -20,6 +20,12 @@ client_fra.download_file_from_s3(bucket_name, object_name, local_file_path)
 async def root():
     return {"message": "Hello from FRA server"}
 
+@app.get("/download_dataset")
+async def download_dataset():
+    print("Api hit for download")
+    response = client_fra.download_file_from_s3(bucket_name, object_name, local_file_path)
+    return {"message": f"Dataset download result '{response}'!"}
+
 @app.post("/local_training")
 async def test(weights_data: WeightsData):
     base64_encoded_weights = weights_data.weights

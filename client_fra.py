@@ -53,7 +53,8 @@ def local_training(global_weights):
     # converting the lists into arrays
     series_trans = np.array(Mbits_transmitted)
     window_size = 20
-    batch_size = 16
+    batch_size = 20
+    total_epochs = 5
     dataset = windowed_dataset(np.array(series_trans), window_size, batch_size, len(series_trans))
     smlp_local = SimpleMLP()
     local_model = smlp_local.build()
@@ -63,7 +64,7 @@ def local_training(global_weights):
     logger.info("set local model weight to the weight of the global model")
     local_model.set_weights(global_weights)
     logger.info("fit local model with client's data")
-    local_model.fit(dataset, epochs=1, verbose=0)
+    local_model.fit(dataset, epochs= total_epochs, verbose=0)
 
     serialized_weights = pickle.dumps(local_model.get_weights())
     base64_encoded_weights = base64.b64encode(serialized_weights).decode('utf-8')
